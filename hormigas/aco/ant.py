@@ -1,7 +1,6 @@
 import random
 import csv
 import math
-
 # The Ant class encompasses the idea of an ant in the ACO algorithm.
 # Ants will move to different attractions and leave pheromones behind. Ants will also make a judgement about which
 # attraction to visit next. And lastly, ants will have knowledge about their respective total distance travelled.
