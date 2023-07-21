@@ -89,7 +89,7 @@ class Ant:
 
 ATTRACTION_COUNT = 5
 # Set the probability of ants choosing a random attraction to visit (0.0 - 1.0)
-RANDOM_ATTRACTION_FACTOR = 0.0
+RANDOM_ATTRACTION_FACTOR = 0.5
 # Set the weight for pheromones on path for selection
 ALPHA = 4
 # Set the weight for heuristic of path for selection
@@ -103,11 +103,39 @@ def config_parameters_problem(num_atractions, alpha, beta, random_attraction_fac
     Ant.BETA = beta
     Ant.ALPHA = alpha
     Ant.RANDOM_ATTRACTION_FACTOR = random_attraction_factor
+    Ant.attraction_distances = [[0, 5, 8],[5, 0, 2],[8, 2, 0]]
     # Initialize the 2D matrix for storing distances between attractions
+    """
     with open('attractions-' + str(num_atractions) + '.csv') as file:
         reader = csv.reader(file, quoting=csv.QUOTE_NONNUMERIC)
         for row in reader:
             Ant.attraction_distances.append(row)
+    """
+attraction_distances = config_parameters_problem(num_atractions = 3, alpha = 4, beta = 7, random_attraction_factor = 0.5)
 
-attraction_distances = config_parameters_problem(ATTRACTION_COUNT, ALPHA, BETA, RANDOM_ATTRACTION_FACTOR)
+print("Matriz de distancias -> Links: (1) - (2) - (3)")
+print(Ant.attraction_distances)
+print("Matriz de feromonas: Solo para una hormiga")
+fer_ant1 = [[1,1,1],[1,1,1],[1,1,1]]
+fer_ant2 = [[1,1,1],[1,1,1],[1,1,1]]
+ant1 = Ant()
+print("Visitas Hormiga 1:", ant1.visited_attractions)
+ant2 = Ant()
+print("Visitas Hormiga 2:", ant2.visited_attractions)
+print(ant1.visit_attraction(fer_ant1))
+# print("Hormiga 1:", ant1_trail1)
+ant2_trail1 = ant2.visit_random_attraction()
+print("Hormiga 2:", ant2_trail1)
 
+
+"""
+ant1 = Ant()
+trail_1 = ant1.visit_random_attraction()
+print(trail_1)
+print()
+print(ant1.visited_attractions)
+print(ant1.visit_random_attraction())
+ant1.visit_random_attraction()
+print(ant1.visit_random_attraction())
+print(ant1.visited_attractions)
+"""
